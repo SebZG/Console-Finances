@@ -93,23 +93,20 @@ var finances = [
 // Greatest Increase in Profits/Losses: MM-YYYY ($xxxx)
 // Greatest Decrease in Profits/Losses: MM-YYYY ($xxxx)
 
+let totalMonths = addMonths(finances)
 
-
-
-let months = totalMonths(finances)
-
-function totalMonths(data) {
-  let totalAmoutOfMonths = 0;
+function addMonths(data) {
+  let totalMonths = 0;
 
   for (let i = 0; i < data.length; i++) {
-    totalAmoutOfMonths++;
+    totalMonths++;
   }
-  return totalAmoutOfMonths;
+  return totalMonths;
 }
 
-let netTotal = netTotalAmmount(finances)
+let netTotal = calcNetTotal(finances)
 
-function netTotalAmmount(data) {
+function calcNetTotal(data) {
   let netMonthlyTotal = 0;
 
   for (let i = 0; i < data.length; i++) {
@@ -141,48 +138,54 @@ function monthToMonthTotalChange(arr) {
   return monthToMonthTotal;
 }
 
-let averageChange = avChange(monthlyTotalChange, months)
+let averageChange = calcAverageChange(monthlyTotalChange, totalMonths)
 
-function avChange(total, months) {
+function calcAverageChange(total, months) {
   return (total / (months - 1)).toFixed(2)
 }
 
-let sortedMonthlyChangeArr = newMonthChangeArr(finances, monthlyChangeArr)
+let mappedMonthlyChangeArr = mapMonthlyChangeArr(finances, monthlyChangeArr)
 
-function newMonthChangeArr(data, monthChangeArr) {
-  let mappedMontlyhChangeArr = [];
-  let sortedArr = []
+function mapMonthlyChangeArr(data, monthChangeArr) {
+  let mappedMonthlyhChangeArr = [];
 
   for (let i = 1; i < data.length; i++) {
-    mappedMontlyhChangeArr.push([data[i][0], monthChangeArr[i - 1]]);
+    mappedMonthlyhChangeArr.push([data[i][0], monthChangeArr[i - 1]]);
   }
 
-  for (let i = 1; i < mappedMontlyhChangeArr.length; i++) {
-    if (mappedMontlyhChangeArr[i][1] > mappedMontlyhChangeArr[i - 1][1]) {
-      sortedArr.push([mappedMontlyhChangeArr[i][0], mappedMontlyhChangeArr[i][1]])
-    }
+  return mappedMonthlyhChangeArr;
+}
+
+// console.log(mappedMonthlyChangeArr)
+
+let sortedMonthlyChangeArr = sortMonthlyChangeArr(mappedMonthlyChangeArr)
+
+function sortMonthlyChangeArr(mappedArr) {
+
+  function sortArr(a, b) {
+    return a[1] - b[1]
   }
 
-  // return sortedArr;
-  return mappedMontlyhChangeArr;
+  return mappedArr.sort(sortArr);
 }
 
 console.log(sortedMonthlyChangeArr)
 
-let greatIncDate = "";
-let greatIncNo = 0;
 
-function greatestIncrease(arr) {
+// let greatIncDate = "";
+// let greatIncNo = 0;
 
-}
+// function greatestIncrease(arr) {
 
-let greatDec = "";
-let greatDecNo = 0;
+// }
 
-function greatestDecrease(arr) {
+// let greatDec = "";
+// let greatDecNo = 0;
 
-}
+// function greatestDecrease(arr) {
 
-console.log(`Total Months: ${months}`);
+// }
+
+console.log(`Total Months: ${totalMonths}`);
 console.log(`Net Total: $${netTotal}`);
 console.log(`Average Change: $${averageChange}`);
