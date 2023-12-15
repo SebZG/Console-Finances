@@ -93,7 +93,6 @@ var finances = [
 // Greatest Increase in Profits/Losses: MM-YYYY ($xxxx)
 // Greatest Decrease in Profits/Losses: MM-YYYY ($xxxx)
 
-// Total Months
 
 let grandTotal = 0;
 let avChange = 0;
@@ -102,13 +101,15 @@ let greatIncDate = "";
 let greatDecNo = 0;
 let greatDec = "";
 
+// Total Months
+
 const totalMonths = (data) => {
   let totalMonths = 0;
 
   for (let i = 0; i < data.length; i++) {
     totalMonths++
   }
-  return totalMonths
+  return `Total Months: ${totalMonths}`;
 }
 
 // const totalFinances = (data) => { }
