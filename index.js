@@ -138,7 +138,7 @@ const avChange = (data) => {
     monthToMonthTotal += monthToMonthArr[i]
   }
 
-  return monthToMonthTotal / totalMonthsMinusOne
+  return (monthToMonthTotal / totalMonthsMinusOne).toFixed(2)
 };
 
 
