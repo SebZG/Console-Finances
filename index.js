@@ -108,7 +108,7 @@ const totalMonths = (data) => {
     totalMonths++
   }
   return `Total Months: ${totalMonths}`;
-}
+};
 
 // Net Total
 
@@ -116,18 +116,27 @@ const netTotal = (data) => {
   let netTotal = 0;
 
   for (let i = 0; i < data.length; i++) {
-    for (let j = 0; j < data[1].length; j++) {
-      netTotal += data[j][1]
-    }
-  } return `Total: $${netTotal}`
-}
+    netTotal += data[i][1]
+  }
+  return `Total: $${netTotal}`
+};
 
 // Average Change 
 
-const avChange = () => {
-  let avChange = 0;
-}
+// const avChange = (data) => {
+//   let monthToMonthArr = [];
+//   let monthToMonthTotal = 0;
+//   let totalMonths = 0;
+//   let avChange = 0;
+
+//   for (let i = 0; i < data.length; i++) {
+//     for (let j = 0; j < data[i].length; j++) {
+//       monthToMonthArr.push(data[j][i])  
+//     }
+//   }
+//   console.log(monthToMonthArr)
+// };
 
 
-console.log(totalMonths(finances))
-console.log(netTotal(finances))
+console.log(totalMonths(finances));
+console.log(netTotal(finances));
