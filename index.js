@@ -105,9 +105,9 @@ const totalMonths = (data) => {
   let totalMonths = 0;
 
   for (let i = 0; i < data.length; i++) {
-    totalMonths++
+    totalMonths++;
   }
-  return `Total Months: ${totalMonths}`;
+  return totalMonths
 };
 
 // Net Total
@@ -116,27 +116,32 @@ const netTotal = (data) => {
   let netTotal = 0;
 
   for (let i = 0; i < data.length; i++) {
-    netTotal += data[i][1]
+    netTotal += data[i][1];
   }
   return `Total: $${netTotal}`
 };
 
 // Average Change 
 
-// const avChange = (data) => {
-//   let monthToMonthArr = [];
-//   let monthToMonthTotal = 0;
-//   let totalMonths = 0;
-//   let avChange = 0;
+const avChange = (data) => {
+  let monthToMonthArr = [];
+  let monthToMonthTotal = 0;
+  let totalMonthsMinusOne = totalMonths(finances) - 1
 
-//   for (let i = 0; i < data.length; i++) {
-//     for (let j = 0; j < data[i].length; j++) {
-//       monthToMonthArr.push(data[j][i])  
-//     }
-//   }
-//   console.log(monthToMonthArr)
-// };
+  // Month To Month Change
+  for (let i = 1; i < data.length; i++) {
+    monthToMonthArr.push(data[i][1] - data[i - 1][1]);
+  }
+
+  // Month To Month Total
+  for (let i = 0; i < monthToMonthArr.length; i++) {
+    monthToMonthTotal += monthToMonthArr[i]
+  }
+
+  return monthToMonthTotal / totalMonthsMinusOne
+};
 
 
-console.log(totalMonths(finances));
+console.log(`Total Months: ${totalMonths(finances)}`);
 console.log(netTotal(finances));
+console.log(`Average Change: ${avChange(finances)}`);
