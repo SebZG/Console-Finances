@@ -87,61 +87,77 @@ var finances = [
   ['Feb-2017', 671099],
 ];
 
-// Total Months: 86
-// Total: $xxxx
+// Total Months: xx
+// Net Total: $xxxx
 // Average Change: $xxxxx
 // Greatest Increase in Profits/Losses: MM-YYYY ($xxxx)
 // Greatest Decrease in Profits/Losses: MM-YYYY ($xxxx)
 
-
-let greatIncNo = 0;
 let greatIncDate = "";
-let greatDecNo = 0;
+let greatIncNo = 0;
 let greatDec = "";
+let greatDecNo = 0;
 
 // Total Months
+let months = totalMonths(finances)
 
-const totalMonths = (data) => {
+function totalMonths(data) {
   let totalMonths = 0;
 
   for (let i = 0; i < data.length; i++) {
     totalMonths++;
   }
-  return totalMonths
-};
+  return totalMonths;
+}
 
 // Net Total
+let netTotal = netTotalAmmount(finances)
 
-const netTotal = (data) => {
+function netTotalAmmount(data) {
   let netTotal = 0;
 
   for (let i = 0; i < data.length; i++) {
     netTotal += data[i][1];
   }
-  return `Total: $${netTotal}`
+  return netTotal;
 };
 
-// Average Change 
 
-const avChange = (data) => {
-  let monthToMonthArr = [];
-  let monthToMonthTotal = 0;
-  let totalMonthsMinusOne = totalMonths(finances) - 1
+// Month To Montch Change
+let mToMChangeArr = monthToMonth(finances)
 
-  // Month To Month Change
+function monthToMonth(data) {
+  let monthToMonthArr = []
+
   for (let i = 1; i < data.length; i++) {
     monthToMonthArr.push(data[i][1] - data[i - 1][1]);
   }
+  return monthToMonthArr;
+}
 
-  // Month To Month Total
-  for (let i = 0; i < monthToMonthArr.length; i++) {
-    monthToMonthTotal += monthToMonthArr[i]
+// Month to Month Total Change
+let mToMTotalChange = monthToMonthTotal(finances)
+
+function monthToMonthTotal(data) {
+  monthToMonthTotal = 0;
+
+  for (let i = 0; i < mToMChangeArr.length; i++) {
+    monthToMonthTotal += mToMChangeArr[i]
   }
+  return monthToMonthTotal;
+}
 
-  return (monthToMonthTotal / totalMonthsMinusOne).toFixed(2)
-};
+
+// Average Change
+let averageChange = avChange(finances)
+
+function avChange(data) {
+  let totalMonthsMinusOne = months - 1
+
+  return (mToMTotalChange / totalMonthsMinusOne).toFixed(2)
+}
 
 
-console.log(`Total Months: ${totalMonths(finances)}`);
-console.log(netTotal(finances));
-console.log(`Average Change: ${avChange(finances)}`);
+console.log(`Total Months: ${months}`);
+console.log(`Net Total: ${netTotal}`);
+console.log(`Average Change: ${averageChange}`);
