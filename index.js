@@ -141,10 +141,10 @@ function monthToMonthTotalChange(arr) {
   return monthToMonthTotal;
 }
 
-let averageChange = avChange(monthlyTotalChange, totalMonths)
+let averageChange = avChange(monthlyTotalChange, months)
 
 function avChange(total, months) {
-  return (total / months - 1).toFixed(2)
+  return (total / (months - 1)).toFixed(2)
 }
 
 let sortedMonthlyChangeArr = newMonthChangeArr(finances, monthlyChangeArr)
@@ -157,21 +157,11 @@ function newMonthChangeArr(data, monthChangeArr) {
     mappedMontlyhChangeArr.push([data[i][0], monthChangeArr[i - 1]]);
   }
 
-  // mappedMontlyhChangeArr.map((v, i, a) => {
-  //   const prev = a[i - 1][1];
-  //   const next = a[i + 1][1];
-
-  //   if (prev > next) {
-  //     sortedArr.push()
-  //   }
-  // })
-
-
-  // for (let i = 1; i < mappedMontlyhChangeArr.length; i++) {
-  //   if (mappedMontlyhChangeArr[i][1] > mappedMontlyhChangeArr[i - 1][1]) {
-  //     sortedArr.push([mappedMontlyhChangeArr[i][0], mappedMontlyhChangeArr[i][1]])
-  //   }
-  // }
+  for (let i = 1; i < mappedMontlyhChangeArr.length; i++) {
+    if (mappedMontlyhChangeArr[i][1] > mappedMontlyhChangeArr[i - 1][1]) {
+      sortedArr.push([mappedMontlyhChangeArr[i][0], mappedMontlyhChangeArr[i][1]])
+    }
+  }
 
   // return sortedArr;
   return mappedMontlyhChangeArr;
