@@ -118,10 +118,10 @@ function netTotalAmmount(data) {
   return netMonthlyTotal;
 };
 
-let monthlyChangeArr = monthToMonth(finances)
+let monthlyChangeArr = monthToMonthChange(finances)
 // console.log(monthlyChangeArr)
 
-function monthToMonth(data) {
+function monthToMonthChange(data) {
   let monthToMonthArr = []
 
   for (let i = 1; i < data.length; i++) {
@@ -130,37 +130,54 @@ function monthToMonth(data) {
   return monthToMonthArr;
 }
 
-let monthlyTotalChange = monthToMonthTotalChange(finances)
+let monthlyTotalChange = monthToMonthTotalChange(monthlyChangeArr)
 
-function monthToMonthTotalChange(data) {
+function monthToMonthTotalChange(arr) {
   let monthToMonthTotal = 0;
 
-  for (let i = 0; i < monthlyChangeArr.length; i++) {
-    monthToMonthTotal += monthlyChangeArr[i]
+  for (let i = 0; i < arr.length; i++) {
+    monthToMonthTotal += arr[i]
   }
   return monthToMonthTotal;
 }
 
-let averageChange = avChange(finances)
+let averageChange = avChange(monthlyTotalChange, totalMonths)
 
-function avChange(data) {
-  let totalMonthsMinusOne = months - 1
-
-  return (monthlyTotalChange / totalMonthsMinusOne).toFixed(2)
+function avChange(total, months) {
+  return (total / months - 1).toFixed(2)
 }
 
-let mappedMonthChangeArr = newMonthChangeArr(finances, monthlyChangeArr)
+let sortedMonthlyChangeArr = newMonthChangeArr(finances, monthlyChangeArr)
 
 function newMonthChangeArr(data, monthChangeArr) {
-  let newMonthChangeArr = [];
+  let mappedMontlyhChangeArr = [];
+  let sortedArr = []
 
   for (let i = 1; i < data.length; i++) {
-    newMonthChangeArr.push([data[i][0], monthChangeArr[i - 1]])
+    mappedMontlyhChangeArr.push([data[i][0], monthChangeArr[i - 1]]);
   }
-  return newMonthChangeArr;
+
+  // mappedMontlyhChangeArr.map((v, i, a) => {
+  //   const prev = a[i - 1][1];
+  //   const next = a[i + 1][1];
+
+  //   if (prev > next) {
+  //     sortedArr.push()
+  //   }
+  // })
+
+
+  // for (let i = 1; i < mappedMontlyhChangeArr.length; i++) {
+  //   if (mappedMontlyhChangeArr[i][1] > mappedMontlyhChangeArr[i - 1][1]) {
+  //     sortedArr.push([mappedMontlyhChangeArr[i][0], mappedMontlyhChangeArr[i][1]])
+  //   }
+  // }
+
+  // return sortedArr;
+  return mappedMontlyhChangeArr;
 }
 
-console.log(mappedMonthChangeArr)
+console.log(sortedMonthlyChangeArr)
 
 let greatIncDate = "";
 let greatIncNo = 0;
