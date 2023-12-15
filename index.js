@@ -101,26 +101,26 @@ let greatDecNo = 0;
 let months = totalMonths(finances)
 
 function totalMonths(data) {
-  let totalMonths = 0;
+  let totalAmoutOfMonths = 0;
 
   for (let i = 0; i < data.length; i++) {
-    totalMonths++;
+    totalAmoutOfMonths++;
   }
-  return totalMonths;
+  return totalAmoutOfMonths;
 }
 
 let netTotal = netTotalAmmount(finances)
 
 function netTotalAmmount(data) {
-  let netTotal = 0;
+  let netMonthlyTotal = 0;
 
   for (let i = 0; i < data.length; i++) {
-    netTotal += data[i][1];
+    netMonthlyTotal += data[i][1];
   }
-  return netTotal;
+  return netMonthlyTotal;
 };
 
-let mToMChangeArr = monthToMonth(finances)
+let monthlyChangeArr = monthToMonth(finances)
 
 function monthToMonth(data) {
   let monthToMonthArr = []
@@ -131,13 +131,13 @@ function monthToMonth(data) {
   return monthToMonthArr;
 }
 
-let mToMTotalChange = monthToMonthTotalChange(finances)
+let monthlyTotalChange = monthToMonthTotalChange(finances)
 
 function monthToMonthTotalChange(data) {
   let monthToMonthTotal = 0;
 
-  for (let i = 0; i < mToMChangeArr.length; i++) {
-    monthToMonthTotal += mToMChangeArr[i]
+  for (let i = 0; i < monthlyChangeArr.length; i++) {
+    monthToMonthTotal += monthlyChangeArr[i]
   }
   return monthToMonthTotal;
 }
@@ -147,7 +147,7 @@ let averageChange = avChange(finances)
 function avChange(data) {
   let totalMonthsMinusOne = months - 1
 
-  return (mToMTotalChange / totalMonthsMinusOne).toFixed(2)
+  return (monthlyTotalChange / totalMonthsMinusOne).toFixed(2)
 }
 
 console.log(`Total Months: ${months}`);
