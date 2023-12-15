@@ -93,10 +93,8 @@ var finances = [
 // Greatest Increase in Profits/Losses: MM-YYYY ($xxxx)
 // Greatest Decrease in Profits/Losses: MM-YYYY ($xxxx)
 
-let greatIncDate = "";
-let greatIncNo = 0;
-let greatDec = "";
-let greatDecNo = 0;
+
+
 
 let months = totalMonths(finances)
 
@@ -121,6 +119,7 @@ function netTotalAmmount(data) {
 };
 
 let monthlyChangeArr = monthToMonth(finances)
+// console.log(monthlyChangeArr)
 
 function monthToMonth(data) {
   let monthToMonthArr = []
@@ -148,6 +147,33 @@ function avChange(data) {
   let totalMonthsMinusOne = months - 1
 
   return (monthlyTotalChange / totalMonthsMinusOne).toFixed(2)
+}
+
+let mappedMonthChangeArr = newMonthChangeArr(finances, monthlyChangeArr)
+
+function newMonthChangeArr(data, monthChangeArr) {
+  let newMonthChangeArr = [];
+
+  for (let i = 1; i < data.length; i++) {
+    newMonthChangeArr.push([data[i][0], monthChangeArr[i - 1]])
+  }
+  return newMonthChangeArr;
+}
+
+console.log(mappedMonthChangeArr)
+
+let greatIncDate = "";
+let greatIncNo = 0;
+
+function greatestIncrease(arr) {
+
+}
+
+let greatDec = "";
+let greatDecNo = 0;
+
+function greatestDecrease(arr) {
+
 }
 
 console.log(`Total Months: ${months}`);
