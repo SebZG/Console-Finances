@@ -89,7 +89,7 @@ var finances = [
 
 // Total Months: xx
 // Net Total: $xxxx
-// Average Change: $xxxxx
+// Average Change: $xxxx
 // Greatest Increase in Profits/Losses: MM-YYYY ($xxxx)
 // Greatest Decrease in Profits/Losses: MM-YYYY ($xxxx)
 
@@ -116,7 +116,6 @@ function calcNetTotal(data) {
 };
 
 let monthlyChangeArr = monthToMonthChange(finances)
-// console.log(monthlyChangeArr)
 
 function monthToMonthChange(data) {
   let monthToMonthArr = []
@@ -156,11 +155,13 @@ function mapMonthlyChangeArr(data, monthChangeArr) {
   return mappedMonthlyhChangeArr;
 }
 
-// console.log(mappedMonthlyChangeArr)
-
 let sortedMonthlyChangeArr = sortMonthlyChangeArr(mappedMonthlyChangeArr)
 
 function sortMonthlyChangeArr(mappedArr) {
+
+  // return mappedArr.sort((a, b) => {
+  //   a[1] - b[1]
+  // })
 
   function sortArr(a, b) {
     return a[1] - b[1]
@@ -169,23 +170,12 @@ function sortMonthlyChangeArr(mappedArr) {
   return mappedArr.sort(sortArr);
 }
 
-console.log(sortedMonthlyChangeArr)
+function displayFinances(months, net, average, arr) {
+  console.log(`Total Months: ${months}`)
+  console.log(`Net Total: $${net}`);
+  console.log(`Average Change: $${average}`);
+  console.log(`Greatest Increase in Profits/Losses: ${arr[0 + arr.length - 1][0]} ($${arr[0 + arr.length - 1][1]})`)
+  console.log(`Greatest Decrease in Profits/Losses: ${arr[0][0]} ($${arr[0][1]})`)
+}
 
-
-// let greatIncDate = "";
-// let greatIncNo = 0;
-
-// function greatestIncrease(arr) {
-
-// }
-
-// let greatDec = "";
-// let greatDecNo = 0;
-
-// function greatestDecrease(arr) {
-
-// }
-
-console.log(`Total Months: ${totalMonths}`);
-console.log(`Net Total: $${netTotal}`);
-console.log(`Average Change: $${averageChange}`);
+displayFinances(totalMonths, netTotal, averageChange, sortedMonthlyChangeArr)
