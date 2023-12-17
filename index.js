@@ -93,18 +93,9 @@ var finances = [
 // Greatest Increase in Profits/Losses: MM-YYYY ($xxxx)
 // Greatest Decrease in Profits/Losses: MM-YYYY ($xxxx)
 
-let totalMonths = addMonths(finances)
-
 function addMonths(data) {
-  let months = 0;
-
-  for (let i = 0; i < data.length; i++) {
-    months++;
-  }
-  return months;
+  return data.length;
 }
-
-let netTotal = calcNetTotal(finances);
 
 function calcNetTotal(data) {
   let netMonthlyTotal = 0;
@@ -115,8 +106,6 @@ function calcNetTotal(data) {
   return netMonthlyTotal;
 };
 
-let monthlyChangeArr = monthToMonthChangeArr(finances);
-
 function monthToMonthChangeArr(data) {
   let monthToMonthArr = []
 
@@ -125,8 +114,6 @@ function monthToMonthChangeArr(data) {
   }
   return monthToMonthArr;
 }
-
-let monthlyTotalChange = monthToMonthTotalChange(monthlyChangeArr);
 
 function monthToMonthTotalChange(arr) {
   let monthToMonthTotal = 0;
@@ -137,13 +124,9 @@ function monthToMonthTotalChange(arr) {
   return monthToMonthTotal;
 }
 
-let averageChange = calcAverageChange(monthlyTotalChange, totalMonths);
-
 function calcAverageChange(totalChange, totalMonths) {
   return (totalChange / (totalMonths - 1)).toFixed(2);
 }
-
-let mappedMonthlyChangeArr = mapMonthlyChangeArr(finances, monthlyChangeArr);
 
 function mapMonthlyChangeArr(data, monthlyChangeArr) {
   let mappedMonthlyhChangeArr = [];
@@ -155,26 +138,15 @@ function mapMonthlyChangeArr(data, monthlyChangeArr) {
   return mappedMonthlyhChangeArr;
 }
 
-let sortedMonthlyChangeArr = sortMonthlyChangeArr(mappedMonthlyChangeArr);
-
 function sortMonthlyChangeArr(mappedArr) {
-
-  // return mappedArr.sort((a, b) => {
-  //   a[1] - b[1]
-  // })
-
-  function sortArr(a, b) {
-    return a[1] - b[1]
-  }
-
-  return mappedArr.sort(sortArr);
+  return mappedArr.sort((a, b) => a[1] - b[1])
 }
 
 function displayFinances(months, net, average, arr) {
   let worstMonth = arr[0][0];
   let worstAmmount = arr[0][1];
-  let bestMonth = arr[0 + arr.length - 1][0];
-  let bestAmmount = arr[0 + arr.length - 1][1];
+  let bestMonth = arr[arr.length - 1][0];
+  let bestAmmount = arr[arr.length - 1][1];
 
   console.log(`Total Months: ${months}`)
   console.log(`Net Total: $${net}`);
@@ -182,5 +154,13 @@ function displayFinances(months, net, average, arr) {
   console.log(`Greatest Increase in Profits/Losses: ${bestMonth} ($${bestAmmount})`);
   console.log(`Greatest Decrease in Profits/Losses: ${worstMonth} ($${worstAmmount})`);
 }
+
+let totalMonths = addMonths(finances);
+let netTotal = calcNetTotal(finances);
+let monthlyChangeArr = monthToMonthChangeArr(finances);
+let monthlyTotalChange = monthToMonthTotalChange(monthlyChangeArr);
+let averageChange = calcAverageChange(monthlyTotalChange, totalMonths);
+let mappedMonthlyChangeArr = mapMonthlyChangeArr(finances, monthlyChangeArr);
+let sortedMonthlyChangeArr = sortMonthlyChangeArr(mappedMonthlyChangeArr);
 
 displayFinances(totalMonths, netTotal, averageChange, sortedMonthlyChangeArr);
