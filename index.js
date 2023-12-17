@@ -96,42 +96,40 @@ var finances = [
 const addMonths = (data) => data.length;
 
 const calcNetTotal = (data) =>
-  data.reduce((total, item) => total + item[1], 0);
+  data.reduce((total, [_, value]) => total + value, 0);
 
 const monthToMonthChangeArr = (data) =>
-  data.slice(1).map((item, index) => item[1] - data[index][1]);
+  data.slice(1).map(([_, value], index) => value - data[index][1]);
 
 const monthToMonthTotalChange = (arr) =>
-  arr.reduce((total, item) => total + item, 0);
+  arr.reduce((total, value) => total + value, 0);
 
 const calcAverageChange = (totalChange, totalMonths) =>
   (totalChange / (totalMonths - 1)).toFixed(2);
 
 const mapMonthlyChangeArr = (data, monthlyChangeArr) =>
-  data.slice(1).map((item, index) => [item[0], monthlyChangeArr[index]]);
+  data.slice(1).map(([month, _], value) => [month, monthlyChangeArr[value]]);
 
 const sortMonthlyChangeArr = (mappedArr) =>
   mappedArr.sort((a, b) => a[1] - b[1]);
 
 const displayFinances = (months, net, average, arr) => {
-  let worstMonth = arr[0][0];
-  let worstAmmount = arr[0][1];
-  let bestMonth = arr[arr.length - 1][0];
-  let bestAmmount = arr[arr.length - 1][1];
+  const [worstMonth, worstAmount] = arr[0];
+  const [bestMonth, bestAmount] = arr[arr.length - 1];
 
   console.log(`Total Months: ${months}`)
   console.log(`Net Total: $${net}`);
   console.log(`Average Change: $${average}`);
-  console.log(`Greatest Increase in Profits/Losses: ${bestMonth} ($${bestAmmount})`);
-  console.log(`Greatest Decrease in Profits/Losses: ${worstMonth} ($${worstAmmount})`);
+  console.log(`Greatest Increase in Profits/Losses: ${bestMonth} ($${bestAmount})`);
+  console.log(`Greatest Decrease in Profits/Losses: ${worstMonth} ($${worstAmount})`);
 }
 
-let totalMonths = addMonths(finances);
-let netTotal = calcNetTotal(finances);
-let monthlyChangeArr = monthToMonthChangeArr(finances);
-let monthlyTotalChange = monthToMonthTotalChange(monthlyChangeArr);
-let averageChange = calcAverageChange(monthlyTotalChange, totalMonths);
-let mappedMonthlyChangeArr = mapMonthlyChangeArr(finances, monthlyChangeArr);
-let sortedMonthlyChangeArr = sortMonthlyChangeArr(mappedMonthlyChangeArr);
+const totalMonths = addMonths(finances),
+  netTotal = calcNetTotal(finances),
+  monthlyChangeArr = monthToMonthChangeArr(finances),
+  monthlyTotalChange = monthToMonthTotalChange(monthlyChangeArr),
+  averageChange = calcAverageChange(monthlyTotalChange, totalMonths),
+  mappedMonthlyChangeArr = mapMonthlyChangeArr(finances, monthlyChangeArr),
+  sortedMonthlyChangeArr = sortMonthlyChangeArr(mappedMonthlyChangeArr);
 
 displayFinances(totalMonths, netTotal, averageChange, sortedMonthlyChangeArr);
