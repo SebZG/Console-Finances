@@ -104,7 +104,7 @@ function addMonths(data) {
   return months;
 }
 
-let netTotal = calcNetTotal(finances)
+let netTotal = calcNetTotal(finances);
 
 function calcNetTotal(data) {
   let netMonthlyTotal = 0;
@@ -115,7 +115,7 @@ function calcNetTotal(data) {
   return netMonthlyTotal;
 };
 
-let monthlyChangeArr = monthToMonthChangeArr(finances)
+let monthlyChangeArr = monthToMonthChangeArr(finances);
 
 function monthToMonthChangeArr(data) {
   let monthToMonthArr = []
@@ -126,7 +126,7 @@ function monthToMonthChangeArr(data) {
   return monthToMonthArr;
 }
 
-let monthlyTotalChange = monthToMonthTotalChange(monthlyChangeArr)
+let monthlyTotalChange = monthToMonthTotalChange(monthlyChangeArr);
 
 function monthToMonthTotalChange(arr) {
   let monthToMonthTotal = 0;
@@ -137,13 +137,13 @@ function monthToMonthTotalChange(arr) {
   return monthToMonthTotal;
 }
 
-let averageChange = calcAverageChange(monthlyTotalChange, totalMonths)
+let averageChange = calcAverageChange(monthlyTotalChange, totalMonths);
 
 function calcAverageChange(totalChange, totalMonths) {
   return (totalChange / (totalMonths - 1)).toFixed(2);
 }
 
-let mappedMonthlyChangeArr = mapMonthlyChangeArr(finances, monthlyChangeArr)
+let mappedMonthlyChangeArr = mapMonthlyChangeArr(finances, monthlyChangeArr);
 
 function mapMonthlyChangeArr(data, monthlyChangeArr) {
   let mappedMonthlyhChangeArr = [];
@@ -155,7 +155,7 @@ function mapMonthlyChangeArr(data, monthlyChangeArr) {
   return mappedMonthlyhChangeArr;
 }
 
-let sortedMonthlyChangeArr = sortMonthlyChangeArr(mappedMonthlyChangeArr)
+let sortedMonthlyChangeArr = sortMonthlyChangeArr(mappedMonthlyChangeArr);
 
 function sortMonthlyChangeArr(mappedArr) {
 
@@ -171,11 +171,16 @@ function sortMonthlyChangeArr(mappedArr) {
 }
 
 function displayFinances(months, net, average, arr) {
+  let worstMonth = arr[0][0];
+  let worstAmmount = arr[0][1];
+  let bestMonth = arr[0 + arr.length - 1][0];
+  let bestAmmount = arr[0 + arr.length - 1][1];
+
   console.log(`Total Months: ${months}`)
   console.log(`Net Total: $${net}`);
   console.log(`Average Change: $${average}`);
-  console.log(`Greatest Increase in Profits/Losses: ${arr[0 + arr.length - 1][0]} ($${arr[0 + arr.length - 1][1]})`);
-  console.log(`Greatest Decrease in Profits/Losses: ${arr[0][0]} ($${arr[0][1]})`);
+  console.log(`Greatest Increase in Profits/Losses: ${bestMonth} ($${bestAmmount})`);
+  console.log(`Greatest Decrease in Profits/Losses: ${worstMonth} ($${worstAmmount})`);
 }
 
 displayFinances(totalMonths, netTotal, averageChange, sortedMonthlyChangeArr);
