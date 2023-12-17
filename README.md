@@ -4,14 +4,17 @@ A JavaScript program that calculates the finaces of a given Array and dsiplays i
 
 [**Deployed Project**](https://sebzg.github.io/Console-Finances/)
 
-## Usage
+##
+### Usage
 To view displayed data, open Dev Tools and open the Console tab.
 
-## Technologies / Languages
+##
+### Technologies / Languages
 - HTML
 - JavaScript
 
-## Resources
+##
+### Resources
 - [**MDN Web Docs**](https://developer.mozilla.org/) 
 - [**W3 School**](https://www.w3schools.com/)
 
