@@ -7,6 +7,10 @@ A JavaScript program that calculates the finaces of a given Array and dsiplays i
 ## Usage
 To view displayed data, open Dev Tools and open the Console tab.
 
+## Technologies / Languages
+- HTML
+- JavaScript
+
 ## Resources
 - [**MDN Web Docs**](https://developer.mozilla.org/) 
 - [**W3 School**](https://www.w3schools.com/)
