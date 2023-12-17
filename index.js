@@ -93,54 +93,25 @@ var finances = [
 // Greatest Increase in Profits/Losses: MM-YYYY ($xxxx)
 // Greatest Decrease in Profits/Losses: MM-YYYY ($xxxx)
 
-const addMonths = (data) => {
-  return data.length;
-}
+const addMonths = (data) => data.length;
 
-const calcNetTotal = (data) => {
-  let netMonthlyTotal = 0;
+const calcNetTotal = (data) =>
+  data.reduce((total, item) => total + item[1], 0);
 
-  for (let i = 0; i < data.length; i++) {
-    netMonthlyTotal += data[i][1];
-  }
-  return netMonthlyTotal;
-};
+const monthToMonthChangeArr = (data) =>
+  data.slice(1).map((item, index) => item[1] - data[index][1]);
 
-const monthToMonthChangeArr = (data) => {
-  let monthToMonthArr = []
+const monthToMonthTotalChange = (arr) =>
+  arr.reduce((total, item) => total + item, 0);
 
-  for (let i = 1; i < data.length; i++) {
-    monthToMonthArr.push(data[i][1] - data[i - 1][1]);
-  }
-  return monthToMonthArr;
-}
+const calcAverageChange = (totalChange, totalMonths) =>
+  (totalChange / (totalMonths - 1)).toFixed(2);
 
-const monthToMonthTotalChange = (arr) => {
-  let monthToMonthTotal = 0;
+const mapMonthlyChangeArr = (data, monthlyChangeArr) =>
+  data.slice(1).map((item, index) => [item[0], monthlyChangeArr[index]]);
 
-  for (let i = 0; i < arr.length; i++) {
-    monthToMonthTotal += arr[i]
-  }
-  return monthToMonthTotal;
-}
-
-const calcAverageChange = (totalChange, totalMonths) => {
-  return (totalChange / (totalMonths - 1)).toFixed(2);
-}
-
-const mapMonthlyChangeArr = (data, monthlyChangeArr) => {
-  let mappedMonthlyhChangeArr = [];
-
-  for (let i = 1; i < data.length; i++) {
-    mappedMonthlyhChangeArr.push([data[i][0], monthlyChangeArr[i - 1]]);
-  }
-
-  return mappedMonthlyhChangeArr;
-}
-
-const sortMonthlyChangeArr = (mappedArr) => {
-  return mappedArr.sort((a, b) => a[1] - b[1])
-}
+const sortMonthlyChangeArr = (mappedArr) =>
+  mappedArr.sort((a, b) => a[1] - b[1]);
 
 const displayFinances = (months, net, average, arr) => {
   let worstMonth = arr[0][0];
