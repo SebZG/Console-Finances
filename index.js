@@ -96,12 +96,12 @@ var finances = [
 let totalMonths = addMonths(finances)
 
 function addMonths(data) {
-  let totalMonths = 0;
+  let months = 0;
 
   for (let i = 0; i < data.length; i++) {
-    totalMonths++;
+    months++;
   }
-  return totalMonths;
+  return months;
 }
 
 let netTotal = calcNetTotal(finances)
@@ -115,9 +115,9 @@ function calcNetTotal(data) {
   return netMonthlyTotal;
 };
 
-let monthlyChangeArr = monthToMonthChange(finances)
+let monthlyChangeArr = monthToMonthChangeArr(finances)
 
-function monthToMonthChange(data) {
+function monthToMonthChangeArr(data) {
   let monthToMonthArr = []
 
   for (let i = 1; i < data.length; i++) {
@@ -139,17 +139,17 @@ function monthToMonthTotalChange(arr) {
 
 let averageChange = calcAverageChange(monthlyTotalChange, totalMonths)
 
-function calcAverageChange(total, months) {
-  return (total / (months - 1)).toFixed(2)
+function calcAverageChange(totalChange, totalMonths) {
+  return (totalChange / (totalMonths - 1)).toFixed(2);
 }
 
 let mappedMonthlyChangeArr = mapMonthlyChangeArr(finances, monthlyChangeArr)
 
-function mapMonthlyChangeArr(data, monthChangeArr) {
+function mapMonthlyChangeArr(data, monthlyChangeArr) {
   let mappedMonthlyhChangeArr = [];
 
   for (let i = 1; i < data.length; i++) {
-    mappedMonthlyhChangeArr.push([data[i][0], monthChangeArr[i - 1]]);
+    mappedMonthlyhChangeArr.push([data[i][0], monthlyChangeArr[i - 1]]);
   }
 
   return mappedMonthlyhChangeArr;
@@ -174,8 +174,8 @@ function displayFinances(months, net, average, arr) {
   console.log(`Total Months: ${months}`)
   console.log(`Net Total: $${net}`);
   console.log(`Average Change: $${average}`);
-  console.log(`Greatest Increase in Profits/Losses: ${arr[0 + arr.length - 1][0]} ($${arr[0 + arr.length - 1][1]})`)
-  console.log(`Greatest Decrease in Profits/Losses: ${arr[0][0]} ($${arr[0][1]})`)
+  console.log(`Greatest Increase in Profits/Losses: ${arr[0 + arr.length - 1][0]} ($${arr[0 + arr.length - 1][1]})`);
+  console.log(`Greatest Decrease in Profits/Losses: ${arr[0][0]} ($${arr[0][1]})`);
 }
 
-displayFinances(totalMonths, netTotal, averageChange, sortedMonthlyChangeArr)
+displayFinances(totalMonths, netTotal, averageChange, sortedMonthlyChangeArr);
