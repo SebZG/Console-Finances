@@ -1,6 +1,6 @@
 # Console Finances
 
-A JavaScript program that calculates the finaces of a given Array and dsiplays it's data in the Console.
+A JavaScript program that calculates the finaces of a given Array and displays it's data in the Console.
 
 [**Deployed Project**](https://sebzg.github.io/Console-Finances/)
 
